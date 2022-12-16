@@ -1,6 +1,7 @@
 package com.example.tproject
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -9,6 +10,12 @@ class Fc1nobreath_a_1 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fc1nobreath_a_1)
+        val emergencycall = findViewById<Button>(R.id.nobreathacall)
+        emergencycall.setOnClickListener {
+            val dial = Uri.parse("tel:119")
+            val intent = Intent(Intent.ACTION_DIAL, dial)
+            startActivity(intent)
+        }
         val fun14a1a = findViewById<Button>(R.id.Fc1_4_a1_a)
         fun14a1a.setOnClickListener {
             val intent = Intent(this, Fc1nobreath_a_1::class.java)
