@@ -1,11 +1,16 @@
 package com.example.tproject
 
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         }
         val fun2 = findViewById<ImageButton>(R.id.Fc2main)
         fun2.setOnClickListener {
-            val intent = Intent(this, Fc2main::class.java)
+            val intent = Intent(this, MapsActivity::class.java)
             startActivity(intent)
         }
     }
