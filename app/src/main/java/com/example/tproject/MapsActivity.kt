@@ -62,6 +62,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
+
         //파싱
         val inputStream: InputStream = assets.open("data2.xml")
         var factory: XmlPullParserFactory = XmlPullParserFactory.newInstance()
@@ -69,63 +70,60 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         parser.setInput(inputStream, null)
         var event = parser.eventType
         Log.d("kkang", event.toString())
-        //파싱
 
         //tag읽기
-        while(parser.next() != XmlPullParser.END_DOCUMENT){
+        while (parser.next() != XmlPullParser.END_DOCUMENT) {
             if (parser.eventType != XmlPullParser.START_TAG) {
                 continue
             }
             // buildAddress의 내용과 org 장소이름 받아오기, 위도경도 받아오기
             if (parser.name == "buildAddress") {
-                Log.d("kkang",parser.name)
-                var result=""
+                Log.d("kkang", parser.name)
+                var result = ""
                 if (parser.next() == XmlPullParser.TEXT) {
                     result = parser.text
                     //places_addr.add(result.toString())
-                    Log.d("kkang",result)
+                    Log.d("kkang", result)
                     parser.nextTag()
                 }
                 //places_addr.add(result)
                 //Log.d("kkang",result)
-            }
-            else if(parser.name=="org"){ //장소 이름 받아오기
-                Log.d("kkang",parser.name)
-                var result=""
+            } else if (parser.name == "org") { //장소 이름 받아오기
+                Log.d("kkang", parser.name)
+                var result = ""
                 if (parser.next() == XmlPullParser.TEXT) {
                     result = parser.text
                     //places_name.add(result)
                     parser.nextTag()
                 }
-                Log.d("kkang",result)
-            }
-            else if (parser.name=="wgs84Lat") { //위도
-                Log.d("kkang",parser.name)
-                var result=""
+                Log.d("kkang", result)
+            } else if (parser.name == "wgs84Lat") { //위도
+                Log.d("kkang", parser.name)
+                var result = ""
                 if (parser.next() == XmlPullParser.TEXT) {
                     result = parser.text
                     //lat1.add(result.toDouble())
                     parser.nextTag()
                 }
-                Log.d("kkang",result)
-            }
-            else if (parser.name=="wgs84Lon"){ //경도
-                Log.d("kkang",parser.name)
-                var result=""
+                Log.d("kkang", result)
+            } else if (parser.name == "wgs84Lon") { //경도
+                Log.d("kkang", parser.name)
+                var result = ""
                 if (parser.next() == XmlPullParser.TEXT) {
                     result = parser.text
-                   // lon1.add(result.toDouble())
+                    // lon1.add(result.toDouble())
                     parser.nextTag()
                 }
-                Log.d("kkang",result)
-            }
-            else {
+                Log.d("kkang", result)
+            } else {
                 continue
             }
         }
         //tag읽기 끝
         makeFun()
+
     }
+
     //주소, 장소 이름, 위도경도를 mutable list places에 넣기
     fun makeFun(){
         val count = lon1.count {true}
