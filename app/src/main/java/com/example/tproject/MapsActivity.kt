@@ -2,6 +2,7 @@ package com.example.tproject
 
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
@@ -31,7 +32,7 @@ data class Place(
 )
 
 //차례대로 이름,위도,경도,주소를 저장할 places, 위도 저장 lat1, 경도 저장 lon1, 장소이름 저장 palces_name, 주소 저장 places_addr
-var places: MutableList<Place> = listOf("hi",LatLng(0.0,0.0),"hi") as MutableList<Place>
+var places: List<Place> = listOf("hi",LatLng(0.0,0.0),"hi") as List<Place>
 var lat1 : MutableList<Double> = listOf(0.0) as MutableList<Double>
 var lon1 : MutableList<Double> = listOf(0.0) as MutableList<Double>
 var places_name: MutableList<String> = listOf("0") as MutableList<String>
@@ -48,6 +49,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     companion object {
         private const val LOCATION_REQUEST_CODE = 1
     }
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -63,76 +67,98 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
         //파싱
-        val inputStream: InputStream = assets.open("data2.xml")
+        val inputStream: InputStream = assets.open("data.xml")
         var factory: XmlPullParserFactory = XmlPullParserFactory.newInstance()
         var parser: XmlPullParser = factory.newPullParser()
         parser.setInput(inputStream, null)
         var event = parser.eventType
-        Log.d("kkang", event.toString())
+
         //파싱
 
         //tag읽기
-        while(parser.next() != XmlPullParser.END_DOCUMENT){
+        var i = 0
+        var result1 = ""
+        var result2 = ""
+        var result3 = ""
+        var result4 = ""
+        while (parser.next() != XmlPullParser.END_DOCUMENT) {
             if (parser.eventType != XmlPullParser.START_TAG) {
                 continue
             }
+
             // buildAddress의 내용과 org 장소이름 받아오기, 위도경도 받아오기
             if (parser.name == "buildAddress") {
-                Log.d("kkang",parser.name)
-                var result=""
+                //Log.d("kkang", parser.name)
+                var result = ""
                 if (parser.next() == XmlPullParser.TEXT) {
-                    result = parser.text
-                    //places_addr.add(result.toString())
-                    Log.d("kkang",result)
+                    result1 = parser.text
+                    //places_addr.add(result1)
+                    //Log.d("kkang", result1)
                     parser.nextTag()
                 }
+                i = i + 1
                 //places_addr.add(result)
                 //Log.d("kkang",result)
-            }
-            else if(parser.name=="org"){ //장소 이름 받아오기
-                Log.d("kkang",parser.name)
-                var result=""
+            } else if (parser.name == "org") { //장소 이름 받아오기
+                //Log.d("kkang", parser.name)
+                var result = ""
                 if (parser.next() == XmlPullParser.TEXT) {
-                    result = parser.text
+                    result2 = parser.text
                     //places_name.add(result)
                     parser.nextTag()
                 }
-                Log.d("kkang",result)
-            }
-            else if (parser.name=="wgs84Lat") { //위도
-                Log.d("kkang",parser.name)
-                var result=""
+                i = i + 1
+                //Log.d("kkang", result2)
+            } else if (parser.name == "wgs84Lat") { //위도
+                //Log.d("kkang", parser.name)
+                var result = ""
                 if (parser.next() == XmlPullParser.TEXT) {
-                    result = parser.text
+                    result3 = parser.text
                     //lat1.add(result.toDouble())
                     parser.nextTag()
                 }
-                Log.d("kkang",result)
-            }
-            else if (parser.name=="wgs84Lon"){ //경도
-                Log.d("kkang",parser.name)
-                var result=""
+                i = i + 1
+                //Log.d("kkang", result3)
+            } else if (parser.name == "wgs84Lon") { //경도
+                //Log.d("kkang", parser.name)
+                var result = ""
                 if (parser.next() == XmlPullParser.TEXT) {
-                    result = parser.text
-                   // lon1.add(result.toDouble())
+                    result4 = parser.text
+                    // lon1.add(result.toDouble())
                     parser.nextTag()
                 }
-                Log.d("kkang",result)
-            }
-            else {
+                i = i + 1
+                //Log.d("kkang", result4)
+            } else {
                 continue
             }
-        }
-        //tag읽기 끝
-        makeFun()
-    }
-    //주소, 장소 이름, 위도경도를 mutable list places에 넣기
-    fun makeFun(){
-        val count = lon1.count {true}
 
-        for(i in 1 until count)
-            places.add(places_name[i],LatLng(lat1[i],lon1[i]), places_addr[i])
+            if (i % 4 == 0) {
+                //places.add(result2,LatLng(result3.toDouble(),result4.toDouble()),result4)
+                //Log.d("kkang", "1")
+                val currentLatLong = LatLng(result3.toDouble(), result4.toDouble())
+                //Log.d("kkang", "2")
+                //val markerOptions = MarkerOptions().position(currentLatLong)
+                //markerOptions.title(result1)
+                //placeMarkerOnMap(currentLatLong)
+                val mapFragment = supportFragmentManager.findFragmentById(
+                    R.id.map
+                ) as? SupportMapFragment
+                mapFragment?.getMapAsync { googleMap ->
+                    placeMarkerOnMap(currentLatLong)
+                }
+                //Log.d("kkang", "3")
+                result1 = ""
+                result2 = ""
+                result3 = ""
+                result4 = ""
+                //Log.d("kkang",places[0].name)
+
+            }
+        }
+        //addMarkers(mMap)
     }
+
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
@@ -143,6 +169,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
     }
 
+    //@SuppressLint("MissingPermission")
     private fun setUpMap() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED) {
@@ -168,6 +195,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
     override fun onMarkerClick(p0: Marker) = false
 
+    private fun addMark() {
+        val currentLatLong = LatLng(35.8881,128.6)
+        val markerOptions = MarkerOptions().position(currentLatLong)
+        mMap.addMarker(markerOptions)
+    }
     //마커 추가하기
     private fun addMarkers(googleMap: GoogleMap) {
         places.forEach { place ->
@@ -180,11 +212,3 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     }
 }
 
-private fun <E> MutableList<E>.add(s: String, latLng: LatLng, s1: String) {
-   // val tmp = mutableListOf<Place>(s,latLng,s1)
-    return mutableListOf<Place>(s,latLng,s1)
-}
-
-fun <T> mutableListOf(elements: String, elements1: LatLng, elements2: String) {
-
-}

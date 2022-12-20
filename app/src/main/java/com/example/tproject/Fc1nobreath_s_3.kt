@@ -16,7 +16,7 @@ class Fc1nobreath_s_3 : AppCompatActivity() {
         }
         val fun14s3s = findViewById<Button>(R.id.Fc1_4_s3_s)
         fun14s3s.setOnClickListener {
-            val intent = Intent(this, Fc1nobreagth_s_1::class.java)
+            val intent = Intent(this, Fc1nobreath_s_1::class.java)
             startActivity(intent)
         }
         val fun14s3n = findViewById<Button>(R.id.Fc1_4_s3_n)
