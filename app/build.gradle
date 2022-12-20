@@ -4,9 +4,15 @@ plugins {
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
+
 android {
     namespace 'com.example.tproject'
     compileSdk 33
+    configurations { implementation.exclude group: 'org.jetbrains', module: 'annotations' }
+
+    viewBinding{
+        enabled = true
+    }
 
     defaultConfig {
         applicationId "com.example.tproject"
@@ -38,6 +44,9 @@ android {
 
 dependencies {
 
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.6.1'
@@ -46,6 +55,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'com.google.android.material:material:1.4.0-alpha02'
+    implementation 'com.google.android.gms:play-services-places:17.0.0'
+    implementation 'androidx.room:room-compiler:2.4.2'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
