@@ -9,84 +9,162 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal">
-        <Button
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="심폐소생술"
-            android:id="@+id/Fc1_1_1_1">
-        </Button>
-        <Button
+            android:layout_gravity="center"
+            android:layout_margin="5dp">
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/button"
+                android:scaleType="fitXY"
+                android:background="@android:color/transparent"
+                android:id="@+id/Fc1_1_1_1">
+            </ImageButton>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="심폐소생술"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:textColor="@color/black">
+            </TextView>
+        </FrameLayout>
+        <FrameLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
-            android:text="AED"
-            android:id="@+id/Fc1_1_1_a">
-        </Button>
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_margin="5dp">
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/button"
+                android:scaleType="fitXY"
+                android:background="@android:color/transparent"
+                android:id="@+id/Fc1_1_1_a">
+            </ImageButton>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="AED"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/black">
+            </TextView>
+        </FrameLayout>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
         </LinearLayout>
-        <LinearLayout
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
-            <Button
-                android:layout_width="0dp"
-                android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_margin="5dp">
+            <ImageButton
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="주의사항"
+                android:src="@drawable/button"
+                android:scaleType="fitXY"
+                android:background="@android:color/transparent"
                 android:id="@+id/Fc1_1_1_w">
-            </Button>
-        </LinearLayout>
+            </ImageButton>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="주의사항"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/black">
+            </TextView>
+        </FrameLayout>
     </LinearLayout>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10">
+        android:layout_weight="8">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background = "@drawable/noheartbeat1_1">
+        </ImageView>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="심정지 및 무호흡 확인">
-        </TextView>
+            android:layout_gravity="center|bottom"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="40dp"
+            android:background="@color/white"
+            android:text="양어깨를 두르리며 말을 걸고 눈과 귀로 심정지 및 무호흡 유무를 확인한다.
+            \n반응이 없다면 다음 단계를 진행한다."
+            android:textSize="20dp"
+            android:textStyle="bold"></TextView>
     </FrameLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-        <LinearLayout
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
-        </LinearLayout>
-        <LinearLayout
+        </FrameLayout>
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:gravity="center">
-            <Button
+            android:layout_weight="2">
+            <ImageButton
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_gravity="center"
+                android:layout_margin ="5dp"
+                android:id="@+id/Fc1_1_1_h"
+                android:src="@drawable/button"
+                android:scaleType="fitXY"
+                android:background="@android:color/transparent">
+            </ImageButton>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="Home"
-                android:id="@+id/Fc1_1_1_h">
-            </Button>
-        </LinearLayout>
-        <Button
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:textColor="@color/black">
+            </TextView>
+        </FrameLayout>
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="Next"
-            android:id="@+id/Fc1_1_1_n">
-        </Button>
+            android:layout_weight="1">
+            <ImageButton
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_margin ="5dp"
+                android:id="@+id/Fc1_1_1_n"
+                android:src="@drawable/button"
+                android:scaleType="fitXY"
+                android:background="@android:color/transparent">
+            </ImageButton>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Next"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:textColor="@color/black">
+            </TextView>
+        </FrameLayout>
     </LinearLayout>
 </LinearLayout>

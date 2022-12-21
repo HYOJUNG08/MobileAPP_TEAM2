@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TProject</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_maps1">Maps_1</string>
 </resources>
